@@ -1,0 +1,10 @@
+<%#
+# To change this template, choose Tools | Templates
+# and open the template in the editor.
+%>
+<% img = image_tag(photo_path(photo, :thumb=>1, :taker_id=>@taker_id), :alt=>"#{photo.name}", :class => "img-polaroid") %>
+<% url = photo_path(photo, :taker_id=>@taker_id) %>
+<div class="thumb">
+  <%= link_to img, url %><br/>
+  <span class="note"><%=photo.created_at.strftime("%Y-%m-%d %H:%M:%S") %></span>
+</div>

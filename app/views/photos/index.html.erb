@@ -1,0 +1,17 @@
+<%if @photos.empty?%>
+You don't have photos uploaded on the site.
+<%else%>
+<h2>Your uploaded photos</h2>
+<% page_numbers = will_paginate @photos,:previous_label =>"&lt;&lt;", :next_label => "&gt;&gt;", :container=>false %>
+<%=render :partial=>'/shared/page_numbers', :locals=>{:page_numbers=>page_numbers}%>
+<div id="photos" class="row-fluid">
+<%#=render @photos || "You don't have any photos uploaded."%>
+  <%last_item = @photos.find_last%>
+  <%@photos.each_with_index do |p, i|%>
+    <%if (i)%3 == 0%><div class="span3"><%end%>
+        <%=render :partial => 'photo', :locals => {:photo => p}%>
+        <%if ((i+1)%3 == 0) or (p.id == last_item.id)%></div><%end%>
+  <%end%>
+</div>
+<%=render :partial=>'/shared/page_numbers', :locals=>{:page_numbers=>page_numbers}%>
+<%end%>
